@@ -4,41 +4,6 @@ import PicDummy from "../../public/img-dummy.jpeg";
 import Image from "next/image";
 import { getCatalog } from "./api";
 
-const dummyKatalog = [
-  {
-    pic: PicDummy,
-    title: "Montain View",
-  },
-  {
-    pic: PicDummy,
-    title: "Montain ",
-  },
-  {
-    pic: PicDummy,
-    title: "Montain ",
-  },
-  {
-    pic: PicDummy,
-    title: "Montain ",
-  },
-  {
-    pic: PicDummy,
-    title: "Montain ",
-  },
-  {
-    pic: PicDummy,
-    title: "Montain ",
-  },
-  {
-    pic: PicDummy,
-    title: "Montain ",
-  },
-  {
-    pic: PicDummy,
-    title: "Montain ",
-  },
-];
-
 const ContentLanding: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
   useEffect(() => {
