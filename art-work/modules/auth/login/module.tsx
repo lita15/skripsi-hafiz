@@ -1,7 +1,34 @@
 import { NextPage } from "next";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
+import { login } from "./api";
+import Router from "next/router";
 
 export const LoginModule: NextPage = (): ReactElement => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = {
+      identifier: email,
+      password,
+    };
+    try {
+      const response = await login(data);
+      localStorage.setItem("token", JSON.stringify(response.jwt));
+      Router.push("/");
+    } catch (error) {
+      console.error("login failed", error);
+      // Handle registration error
+    }
+  };
   return (
     <div className="">
       <section className=" grid lg:grid-cols-2 grid-col-1">
@@ -25,6 +52,9 @@ export const LoginModule: NextPage = (): ReactElement => {
                 id="email1"
                 name="email1"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                value={email}
+                onChange={handleEmailChange}
+                required
               />
             </div>
             <div className="mb-6">
@@ -39,10 +69,13 @@ export const LoginModule: NextPage = (): ReactElement => {
                 id="password1"
                 name="password1"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                value={password}
+                onChange={handlePasswordChange}
+                required
               />
             </div>
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="w-full mt-4 font-[600] bg-gray-800 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 "
             >
               Submit
