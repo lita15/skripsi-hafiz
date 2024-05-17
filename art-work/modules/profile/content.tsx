@@ -1,9 +1,8 @@
 import { NextPage } from "next";
 import { ReactElement } from "react";
-import { InboxOutlined } from "@ant-design/icons";
+import { InboxOutlined } from "@ant-design/icons/lib";
 import type { UploadProps } from "antd/lib";
 import { Image, message, Upload } from "antd/lib";
-import PicDummy from "../../public/img-dummy.jpeg";
 
 const ContentProfile: NextPage = (): ReactElement => {
   const { Dragger } = Upload;
@@ -26,12 +25,6 @@ const ContentProfile: NextPage = (): ReactElement => {
       console.log("Dropped files", e.dataTransfer.files);
     },
   };
-
-  const dummyProfile = [
-    { img: PicDummy },
-    { img: PicDummy },
-    { img: PicDummy },
-  ];
 
   return (
     <section className=" pt-10 px-14 bg-gray-300">

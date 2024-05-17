@@ -1,17 +1,32 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
+import { Popover } from "antd/lib";
+import Link from "next/link";
+import { AiOutlineUser } from "react-icons/ai";
+import { BiLogOutCircle } from "react-icons/bi";
 
 export const NavbarModule: NextPage = (): ReactElement => {
   const router = useRouter();
-  const handleLogin = () => {
-    router.push("/auth/login");
+  const [open, setOpen] = useState(false);
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen);
   };
-  const handleRegister = () => {
-    router.push("/auth/register");
-  };
-  const handleArtWork = () => {
-    router.push("/artWork");
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      setToken(token);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      setToken(null);
+      router.push("/");
+    }
   };
 
   return (
@@ -23,24 +38,69 @@ export const NavbarModule: NextPage = (): ReactElement => {
             <button className="" onClick={() => router.push("/")}>
               Katalog
             </button>
-            <button className="" onClick={handleArtWork}>
+            <button
+              className=""
+              onClick={() => {
+                router.push("/artWork");
+              }}
+            >
               ArtWork
             </button>
           </div>
         </section>
-        <section className=" nav-auth flex gap-5 text-white">
-          <button
-            className=" font-inter font-[700] bg-gray-900 px-6 py-2 rounded-[20px]"
-            onClick={handleLogin}
-          >
-            Login
-          </button>
-          <button
-            className=" font-inter font-[700] bg-gray-900 px-6 py-2 rounded-[20px]"
-            onClick={handleRegister}
-          >
-            Register
-          </button>
+        <section className=" nav-auth flex gap-5 text-white items-center">
+          {token ? (
+            <>
+              <Popover
+                content={
+                  <>
+                    <Link
+                      href={"/profile"}
+                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer hover:bg-gray-500 px-3 py-1.5 rounded-md shadow-sm"
+                    >
+                      <AiOutlineUser className="text-xl text-black" />
+                      <p className="font-medium text-black font-gothic text-[14px]">
+                        Profile
+                      </p>
+                    </Link>
+                    <section
+                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer hover:bg-gray-500 px-3 py-1.5 rounded-md shadow-sm"
+                      onClick={handleLogout}
+                    >
+                      <BiLogOutCircle className=" text-xl text-black" />
+                      <p className="font-medium text-black font-gothic text-[13px]">
+                        Log Out
+                      </p>
+                    </section>
+                  </>
+                }
+                trigger="click"
+                open={open}
+                onOpenChange={handleOpenChange}
+              >
+                <h2 className=" font-[500] cursor-pointer">Halo, gais</h2>
+              </Popover>
+            </>
+          ) : (
+            <>
+              <button
+                className=" font-inter font-[700] bg-gray-900 px-6 py-2 rounded-[20px]"
+                onClick={() => {
+                  router.push("/auth/login");
+                }}
+              >
+                Login
+              </button>
+              <button
+                className=" font-inter font-[700] bg-gray-900 px-6 py-2 rounded-[20px]"
+                onClick={() => {
+                  router.push("/auth/register");
+                }}
+              >
+                Register
+              </button>
+            </>
+          )}
         </section>
       </div>
     </div>
