@@ -54,8 +54,6 @@ const ContentLanding: NextPage = (): ReactElement => {
     fetchData();
   }, []);
 
-  console.log("cek", data);
-
   return (
     <section className=" pt-20 px-14 bg-gray-300">
       <div className=" flex justify-center">
