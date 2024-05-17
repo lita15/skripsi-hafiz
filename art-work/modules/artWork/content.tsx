@@ -106,7 +106,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
                 alias corrupti nostrum placeat perspiciatis consequatur dolorum
                 incidunt iusto optio quam illo perferendis eius.{" "}
               </p>
-              <p className=" mt-10 mb-3">Share :</p>
+              <p className=" mt-10 mb-2">Share :</p>
               <RiInstagramFill size={30} />
             </div>
           </div>

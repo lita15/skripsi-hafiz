@@ -6,9 +6,11 @@ import { FooterModule } from "@/components/footer";
 
 const LandingModule: NextPage = (): ReactElement => {
   return (
-    <div className="">
+    <div className=" flex flex-col min-h-screen">
       <NavbarModule />
-      <ContentLanding />
+      <div className=" flex-grow">
+        <ContentLanding />
+      </div>
       <FooterModule />
     </div>
   );

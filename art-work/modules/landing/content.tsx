@@ -55,7 +55,7 @@ const ContentLanding: NextPage = (): ReactElement => {
   }, []);
 
   return (
-    <section className=" pt-20 px-14 bg-gray-300">
+    <section className=" pt-0 px-14 bg-gray-300">
       <div className=" flex justify-center">
         <img src="./logo-dork.png" alt="" width={220} />
       </div>
