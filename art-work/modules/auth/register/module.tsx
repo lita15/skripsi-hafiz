@@ -1,7 +1,40 @@
 import { NextPage } from "next";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
+import { register } from "./api";
+import Router from "next/router";
 
-export const RegisterModule: NextPage = (): ReactElement => {
+const RegisterModule: NextPage = (): ReactElement => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const handleEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
+
+  const handleUsernameChange = (e: any) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = {
+      email,
+      username,
+      password,
+    };
+    try {
+      const response = await register(data);
+      Router.push("/auth/login");
+    } catch (error) {
+      console.error("Registration failed", error);
+      // Handle registration error
+    }
+  };
+
   return (
     <div className="">
       <section className=" grid lg:grid-cols-2 grid-col-1">
@@ -29,6 +62,9 @@ export const RegisterModule: NextPage = (): ReactElement => {
                 id="email1"
                 name="email1"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                value={email}
+                onChange={handleEmailChange}
+                required
               />
             </div>
             <div className="mb-4 ">
@@ -43,6 +79,9 @@ export const RegisterModule: NextPage = (): ReactElement => {
                 id="name"
                 name="name"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                value={username}
+                onChange={handleUsernameChange}
+                required
               />
             </div>
             <div className="mb-6">
@@ -57,10 +96,13 @@ export const RegisterModule: NextPage = (): ReactElement => {
                 id="password1"
                 name="password1"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                value={password}
+                onChange={handlePasswordChange}
+                required
               />
             </div>
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="w-full mt-4 font-[600] bg-gray-800 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 "
             >
               Daftar
@@ -78,3 +120,5 @@ export const RegisterModule: NextPage = (): ReactElement => {
     </div>
   );
 };
+
+export default RegisterModule;
