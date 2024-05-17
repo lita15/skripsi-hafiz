@@ -1,4 +1,4 @@
-import { RegisterModule } from "@/modules/auth/register/module";
+import RegisterModule from "@/modules/auth/register/module";
 import { NextPage } from "next";
 import { ReactElement } from "react";
 
