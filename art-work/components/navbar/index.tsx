@@ -15,7 +15,7 @@ export const NavbarModule: NextPage = (): ReactElement => {
   };
 
   return (
-    <div className=" bg-gray-600 top-0 w-full z-50 fixed">
+    <div className=" bg-gray-600 w-full z-50 sticky top-0">
       <div className=" flex flex-row justify-between px-10 md:px-10 md:py-5 py-3 items-center">
         <section className=" nav-logo flex items-center gap-5">
           <img src="./logo.png" alt="" width={50} height={"auto"} />
