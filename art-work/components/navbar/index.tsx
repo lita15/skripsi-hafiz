@@ -10,6 +10,9 @@ export const NavbarModule: NextPage = (): ReactElement => {
   const handleRegister = () => {
     router.push("/auth/register");
   };
+  const handleArtWork = () => {
+    router.push("/artWork");
+  };
 
   return (
     <div className=" bg-gray-600 top-0 w-full z-50 fixed">
@@ -17,8 +20,12 @@ export const NavbarModule: NextPage = (): ReactElement => {
         <section className=" nav-logo flex items-center gap-5">
           <img src="./logo.png" alt="" width={50} height={"auto"} />
           <div className=" flex gap-5 text-white font-inter font-[700] text-[18px]">
-            <div className="">Katalog</div>
-            <div className="">ArtWork</div>
+            <button className="" onClick={() => router.push("/")}>
+              Katalog
+            </button>
+            <button className="" onClick={handleArtWork}>
+              ArtWork
+            </button>
           </div>
         </section>
         <section className=" nav-auth flex gap-5 text-white">
