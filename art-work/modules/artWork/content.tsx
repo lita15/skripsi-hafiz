@@ -5,10 +5,13 @@ import Image from "next/image";
 import { Modal } from "antd/lib";
 import { RiInstagramFill } from "react-icons/ri";
 import { getArtworks, getArtworksById } from "./api";
+import Link from "next/link";
+import Router from "next/router";
 
 const ContentArtWork: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
-  const [detail, setDetail] = useState();
+  const [detail, setDetail] = useState<any>();
+  const [point, setPoint] = useState();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,7 +28,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const catalogData = await getArtworksById(1);
+        const catalogData = await getArtworksById(point);
         setDetail(catalogData?.data);
       } catch (error) {
         console.error("Error fetching catalog data:", error);
@@ -33,18 +36,20 @@ const ContentArtWork: NextPage = (): ReactElement => {
     };
 
     fetchData();
-  }, []);
+  }, [point]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
+  const showModal = (data: any) => {
     setIsModalOpen(true);
+    setPoint(data);
   };
 
   const handleOk = () => {
     setIsModalOpen(false);
   };
-  console.log("cekin", detail);
+
+  console.log("cek", point);
 
   return (
     <section className=" pt-20 px-14 bg-gray-300">
@@ -58,7 +63,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
             <div className="">
               <div
                 className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl cursor-pointer"
-                onClick={showModal}
+                onClick={() => showModal(data?.id)}
               >
                 <Image
                   src={data?.attributes?.image?.data[0]?.attributes?.url}
@@ -101,13 +106,16 @@ const ContentArtWork: NextPage = (): ReactElement => {
                 {detail?.attributes?.user?.data?.attributes?.username}
               </h2>
               <p className=" mt-3 text-[16px]">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo,
-                maiores obcaecati aut dignissimos tempora reprehenderit facere
-                alias corrupti nostrum placeat perspiciatis consequatur dolorum
-                incidunt iusto optio quam illo perferendis eius.{" "}
+                {detail?.attributes?.description}
               </p>
               <p className=" mt-10 mb-2">Share :</p>
-              <RiInstagramFill size={30} />
+
+              <RiInstagramFill
+                size={30}
+                onClick={() =>
+                  Router.push(detail?.attributes?.social_media_url)
+                }
+              />
             </div>
           </div>
         </Modal>

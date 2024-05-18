@@ -23,6 +23,7 @@ export const LoginModule: NextPage = (): ReactElement => {
     try {
       const response = await login(data);
       localStorage.setItem("token", JSON.stringify(response.jwt));
+      localStorage.setItem("user", JSON.stringify(response.user));
       Router.push("/");
     } catch (error) {
       console.error("login failed", error);

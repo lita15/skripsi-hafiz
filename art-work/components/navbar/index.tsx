@@ -5,10 +5,12 @@ import { Popover } from "antd/lib";
 import Link from "next/link";
 import { AiOutlineUser } from "react-icons/ai";
 import { BiLogOutCircle } from "react-icons/bi";
+import { jwtDecode } from "jwt-decode";
 
 export const NavbarModule: NextPage = (): ReactElement => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState("");
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen);
   };
@@ -16,14 +18,17 @@ export const NavbarModule: NextPage = (): ReactElement => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
+      const token = JSON.parse(localStorage.getItem("token") as string);
       setToken(token);
+      const user = JSON.parse(localStorage.getItem("user") as string);
+      setUser(user?.username);
     }
   }, []);
 
   const handleLogout = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       setToken(null);
       router.push("/");
     }
@@ -78,7 +83,7 @@ export const NavbarModule: NextPage = (): ReactElement => {
                 open={open}
                 onOpenChange={handleOpenChange}
               >
-                <h2 className=" font-[500] cursor-pointer">Halo, gais</h2>
+                <h2 className=" font-[500] cursor-pointer">Halo, {user}</h2>
               </Popover>
             </>
           ) : (

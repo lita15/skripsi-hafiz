@@ -1,11 +1,20 @@
 import { NextPage } from "next";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons/lib";
 import type { UploadProps } from "antd/lib";
 import { Image, message, Upload } from "antd/lib";
 
 const ContentProfile: NextPage = (): ReactElement => {
   const { Dragger } = Upload;
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const user = JSON.parse(localStorage.getItem("user") as string);
+      setUser(user);
+    }
+  }, []);
+
   const props: UploadProps = {
     name: "file",
     multiple: true,
@@ -36,8 +45,8 @@ const ContentProfile: NextPage = (): ReactElement => {
               alt={""}
               className=" rounded-full w-1/4 mb-1"
             />
-            <h1 className=" font-[700] text-[20px]">Kendal Janner Fatahelah</h1>
-            <h2 className=" font-[500] text-[16px] mt-2">kendal@gmail.com</h2>
+            <h1 className=" font-[700] text-[20px]">{user?.username}</h1>
+            <h2 className=" font-[500] text-[16px] mt-2">{user?.email}</h2>
           </section>
           <section className=" upload file mt-10 text-[15px] font-[500] mb-3">
             Upload Your Art Work
