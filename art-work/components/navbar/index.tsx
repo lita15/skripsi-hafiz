@@ -15,6 +15,12 @@ export const NavbarModule: NextPage = (): ReactElement => {
     setOpen(newOpen);
   };
   const [token, setToken] = useState<string | null>(null);
+  const [activeButton, setActiveButton] = useState("/");
+
+  useEffect(() => {
+    // Set the active button based on the current route
+    setActiveButton(router.pathname);
+  }, [router.pathname]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -34,8 +40,16 @@ export const NavbarModule: NextPage = (): ReactElement => {
     }
   };
 
+  const handleButtonClick = (path: any) => {
+    setActiveButton(path);
+    router.push(path);
+  };
+
   return (
-    <div className=" bg-gray-600 w-full z-50 sticky top-0">
+    <div
+      // className=" bg-gray-600 w-full z-50 sticky top-0"
+      className=" bg-white w-full z-50 sticky top-0"
+    >
       <div className=" flex flex-row justify-between px-2 md:px-10 md:py-5 py-3 items-center">
         <section className=" nav-logo flex items-center md:gap-5 gap-2">
           <img
@@ -45,17 +59,32 @@ export const NavbarModule: NextPage = (): ReactElement => {
             height={"auto"}
             onClick={() => router.push("/")}
           />
-          <div className=" flex gap-5 text-white font-inter font-[700] md:text-[18px] text-[15px]">
-            <button className="" onClick={() => router.push("/")}>
+          <div className=" flex gap-5 text-black font-inter font-[700] md:text-[18px] text-[15px]">
+            <button
+              className={`relative pb-2 ${
+                activeButton === "/" ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick("/")}
+            >
               Katalog
+              <span
+                className={`absolute left-0 bottom-0 w-full h-[2px]  ${
+                  activeButton === "/" ? "bg-black" : "bg-transparent"
+                } `}
+              />
             </button>
             <button
-              className=""
-              onClick={() => {
-                router.push("/artWork");
-              }}
+              className={`relative pb-2 ${
+                activeButton === "/artWork" ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick("/artWork")}
             >
               ArtWork
+              <span
+                className={`absolute left-0 bottom-0 w-full h-[2px] ${
+                  activeButton === "/artWork" ? "bg-black" : "bg-transparent"
+                } `}
+              />
             </button>
           </div>
         </section>
@@ -89,7 +118,9 @@ export const NavbarModule: NextPage = (): ReactElement => {
                 open={open}
                 onOpenChange={handleOpenChange}
               >
-                <h2 className=" font-[500] cursor-pointer">Halo, {user}</h2>
+                <h2 className=" font-[600] cursor-pointer text-black font-inter">
+                  Halo, {user}
+                </h2>
               </Popover>
             </>
           ) : (

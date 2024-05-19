@@ -34,7 +34,7 @@ export const LoginModule: NextPage = (): ReactElement => {
     <div className="">
       <section className=" grid lg:grid-cols-2 grid-col-1">
         <section className=" login-section lg:pt-44 md:px-36 px-10 pt-60">
-          <h1 className=" text-[#3A3D3F] text-[36px]  font-[700]">
+          <h1 className=" text-black text-[36px]  font-[700]">
             Selamat Datang!
           </h1>
           <p className=" text-[#808A90] text-[14px] font-[400]">
@@ -77,7 +77,7 @@ export const LoginModule: NextPage = (): ReactElement => {
             </div>
             <button
               onClick={handleSubmit}
-              className="w-full mt-4 font-[600] bg-gray-800 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+              className="w-full mt-4 font-[600] bg-black text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 "
             >
               Submit
             </button>
