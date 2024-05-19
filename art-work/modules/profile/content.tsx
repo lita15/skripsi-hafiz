@@ -3,15 +3,26 @@ import { ReactElement, useEffect, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons/lib";
 import type { UploadProps } from "antd/lib";
 import { Image, message, Upload } from "antd/lib";
+import { getArtworks } from "./api";
 
 const ContentProfile: NextPage = (): ReactElement => {
   const { Dragger } = Upload;
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<any>();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const user = JSON.parse(localStorage.getItem("user") as string);
       setUser(user);
+      const fetchData = async () => {
+        try {
+          const catalogData = await getArtworks(user.id);
+          setData(catalogData?.artworks);
+        } catch (error) {
+          console.error("Error fetching catalog data:", error);
+        }
+      };
+      fetchData();
     }
   }, []);
 
@@ -34,6 +45,8 @@ const ContentProfile: NextPage = (): ReactElement => {
       console.log("Dropped files", e.dataTransfer.files);
     },
   };
+
+  console.log("cek", data);
 
   return (
     <section className=" pt-10 px-14 bg-gray-300">
@@ -71,27 +84,19 @@ const ContentProfile: NextPage = (): ReactElement => {
             Your Library Art Work
           </h1>
           <div className=" grid md:grid-cols-3 grid-col-1 gap-6">
-            <div className="">
-              <Image
-                src="/img-dummy.jpeg"
-                alt=""
-                className=" w-full rounded-[20px] "
-              />
-            </div>
-            <div className="">
-              <Image
-                src="/img-dummy.jpeg"
-                alt=""
-                className=" w-full rounded-[20px] "
-              />
-            </div>
-            <div className="">
-              <Image
-                src="/img-dummy.jpeg"
-                alt=""
-                className=" w-full rounded-[20px] "
-              />
-            </div>
+            {data.map((item: any) => {
+              return (
+                <div className="">
+                  <Image
+                    src={item.image[0].url}
+                    alt=""
+                    // height={50}
+                    // width={50}
+                    className=" w-full rounded-[20px] "
+                  />
+                </div>
+              );
+            })}
           </div>
         </section>
       </div>
