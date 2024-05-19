@@ -1,8 +1,7 @@
 import { NextPage } from "next";
 import { ReactElement, useEffect, useState } from "react";
-import PicDummy from "../../public/img-dummy.jpeg";
-import Image from "next/image";
 import { getCatalog } from "./api";
+import { Image } from "antd/lib";
 
 const ContentLanding: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
@@ -22,9 +21,13 @@ const ContentLanding: NextPage = (): ReactElement => {
   return (
     <section className=" pt-0 px-14 bg-gray-300">
       <div className=" flex justify-center">
-        <img src="./logo-dork.png" alt="" width={220} />
+        <img
+          src="./logo-dork.png"
+          alt=""
+          className=" lg:w-2/12 md:w-3/12 w-5/12"
+        />
       </div>
-      <div className=" grid lg:grid-cols-4 md:grid-cols-6 grid-cols-1 lg:gap-10 md:gap-5 gap-3">
+      <div className=" grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-5 gap-3">
         {data?.map((data: any) => {
           return (
             <div className="">
@@ -32,9 +35,8 @@ const ContentLanding: NextPage = (): ReactElement => {
                 <Image
                   src={data?.attributes?.image?.data[0]?.attributes?.url}
                   alt=""
-                  width={50}
-                  height={50}
                   className=" w-full"
+                  preview={false}
                 />
               </div>
               <h1 className=" mt-3 font-[600] text-[18px] font-inter capitalize text-center">

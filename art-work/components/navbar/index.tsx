@@ -36,9 +36,15 @@ export const NavbarModule: NextPage = (): ReactElement => {
 
   return (
     <div className=" bg-gray-600 w-full z-50 sticky top-0">
-      <div className=" flex flex-row justify-between px-10 md:px-10 md:py-5 py-3 items-center">
-        <section className=" nav-logo flex items-center gap-5">
-          <img src="./logo.png" alt="" width={50} height={"auto"} />
+      <div className=" flex flex-row justify-between px-2 md:px-10 md:py-5 py-3 items-center">
+        <section className=" nav-logo flex items-center md:gap-5 gap-2">
+          <img
+            src="./logo.png"
+            alt=""
+            width={50}
+            height={"auto"}
+            onClick={() => router.push("/")}
+          />
           <div className=" flex gap-5 text-white font-inter font-[700] md:text-[18px] text-[15px]">
             <button className="" onClick={() => router.push("/")}>
               Katalog
@@ -87,9 +93,9 @@ export const NavbarModule: NextPage = (): ReactElement => {
               </Popover>
             </>
           ) : (
-            <>
+            <div className=" flex gap-2 md:text-[16px] text-[14px]">
               <button
-                className=" font-inter font-[700] bg-gray-900 px-6 py-2 rounded-[20px]"
+                className=" font-inter font-[700] bg-gray-900 md:px-6 md:py-2 px-5 py-1 rounded-[20px]"
                 onClick={() => {
                   router.push("/auth/login");
                 }}
@@ -97,14 +103,14 @@ export const NavbarModule: NextPage = (): ReactElement => {
                 Login
               </button>
               <button
-                className=" font-inter font-[700] bg-gray-900 px-6 py-2 rounded-[20px]"
+                className=" font-inter font-[700] bg-gray-900 md:px-6 md:py-2 px-5 py-1 rounded-[20px]"
                 onClick={() => {
                   router.push("/auth/register");
                 }}
               >
                 Register
               </button>
-            </>
+            </div>
           )}
         </section>
       </div>
