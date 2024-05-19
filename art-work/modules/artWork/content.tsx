@@ -49,7 +49,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
   console.log("cek", point);
 
   return (
-    <section className=" pt-0 px-14 bg-gray-300">
+    <section className=" -mt-10 px-14">
       <div className=" flex justify-center">
         <img
           src="./logo-dork.png"
