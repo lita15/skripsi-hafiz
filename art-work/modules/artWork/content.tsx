@@ -92,11 +92,12 @@ const ContentArtWork: NextPage = (): ReactElement => {
         >
           <div className="grid grid-cols-2 gap-5 mt-5">
             <div className="box-border rounded-[30px] ">
-              <div className="">
+              <div className=" flex justify-center">
                 <Image
                   src={detail?.attributes?.image?.data[0]?.attributes?.url}
                   alt=""
                   className="rounded-[30px] w-full"
+                  preview={false}
                 />
               </div>
             </div>

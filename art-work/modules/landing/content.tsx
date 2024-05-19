@@ -24,7 +24,7 @@ const ContentLanding: NextPage = (): ReactElement => {
         <img
           src="./logo-dork.png"
           alt=""
-          className=" lg:w-2/12 md:w-3/12 w-5/12"
+          className=" lg:w-2/12 md:w-3/12 w-5/12 cursor-pointer"
         />
       </div>
       <div className=" grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-5 gap-3">
