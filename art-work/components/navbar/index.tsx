@@ -118,7 +118,7 @@ export const NavbarModule: NextPage = (): ReactElement => {
                 open={open}
                 onOpenChange={handleOpenChange}
               >
-                <h2 className=" font-[600] cursor-pointer text-black font-inter">
+                <h2 className=" font-[600] cursor-pointer text-black font-inter -mt-2 md:text-[16p] text-[14px]">
                   Halo, {user}
                 </h2>
               </Popover>

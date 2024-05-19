@@ -86,13 +86,10 @@ const ContentProfile: NextPage = (): ReactElement => {
   };
 
   return (
-    <section className=" pt-10 px-14 bg-gray-300">
+    <section className=" pt-10 px-14 ">
       <div className="grid md:grid-cols-3 grid-col-1 md:gap-10 gap-5">
         <div className="">
           <section className=" profile-detail text-center font-inter flex flex-col items-center box-content border-[2px] py-5  border-gray-400 rounded-lg relative">
-            {/* <div className=" absolute me-0">
-              <FaPencil />
-            </div> */}
             <img
               src="/img-profile.jpg"
               alt={""}
@@ -102,88 +99,54 @@ const ContentProfile: NextPage = (): ReactElement => {
             <h2 className=" font-[500] text-[16px] mt-2">{user?.email}</h2>
           </section>
           <section className=" upload file mt-10 text-[15px] font-[500] mb-3">
-            Upload Your Art Work
+            Edit Profile
           </section>
-          <div className="flex flex-col items-center box-content border-[2px] py-5  border-gray-400 rounded-lg">
+          <div className="flex flex-col box-content border-[2px] py-5  border-gray-400 rounded-lg">
             <form action="" className=" md:px-5 px-3">
               <div className="mb-3 ">
                 <label
-                  htmlFor="title"
+                  htmlFor="username"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Title
+                  Username
                 </label>
                 <input
-                  name="title"
+                  name="username"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
                   required
                   type="text"
-                  id="title"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  id="username"
+                  // value={username}
+                  // onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
               <div className="mb-3 ">
                 <label
-                  htmlFor="desc"
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Description
-                </label>
-                <textarea
-                  name="desc"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-                  required
-                  id="desc"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <div className="mb-3 ">
-                <label
-                  htmlFor="sosmed"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Link Social Media
+                  Email
                 </label>
                 <input
-                  name="sosmed"
+                  name="email"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
                   required
-                  type="text"
-                  id="social-media"
-                  value={socialMedia}
-                  onChange={(e) => setSocialMedia(e.target.value)}
+                  id="email"
+                  // value={description}
+                  // onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Upload Image
-              </label>
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Click or drag file to this area to upload
-                </p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
-              <Button onClick={handleUpload} disabled={!image || uploading}>
-                {uploading ? "Uploading..." : "Start Upload"}
-              </Button>
+
               <button
                 onClick={handleSubmit}
-                className="w-full mt-6 font-[600] bg-gray-800 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                className="w-full mt-6 font-[600] bg-black text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 "
               >
                 Submit
               </button>
             </form>
           </div>
         </div>
-        {/*  */}
+        {/* library art work  */}
         <section className=" profile-history md:col-span-2">
           <h1 className=" mb-5 text-[16px] font-[600] font-inter">
             Your Library Art Work

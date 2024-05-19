@@ -60,7 +60,7 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
         name: title,
         image: [image],
         description: description,
-        user: user.id, // Assume user ID is 1 for this example
+        user: 1, // Assume user ID is 1 for this example
         social_media_url: socialMedia,
       },
     };
@@ -164,12 +164,21 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
             <Button onClick={handleUpload} disabled={!image || uploading}>
               {uploading ? "Uploading..." : "Start Upload"}
             </Button>
-            <button
-              onClick={handleSubmit}
-              className="w-full mt-6 font-[600] bg-gray-800 text-white py-2 px-4 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 "
-            >
-              Submit
-            </button>
+
+            <div className=" flex gap-3 justify-end">
+              <button
+                onClick={() => router.back()}
+                className=" mt-6 font-[600] bg-transparent border-black border-2  text-black py-2 px-5 rounded-md shadow-sm hover:bg-black hover:text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 "
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSubmit}
+                className=" mt-6 font-[600] bg-black text-white py-2 px-5 rounded-md shadow-sm hover:bg-black hover:text-black hover:border-2 hover:border-black focus:outline-none focus:ring-2 focus:ring-offset-2 "
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </Modal>
