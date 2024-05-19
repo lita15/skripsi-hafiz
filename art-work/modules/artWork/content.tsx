@@ -4,6 +4,7 @@ import { Image, Modal } from "antd/lib";
 import { RiInstagramFill } from "react-icons/ri";
 import { getArtworks, getArtworksById } from "./api";
 import Router from "next/router";
+import AddArtWorkModule from "./addArtWork";
 
 const ContentArtWork: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
@@ -49,7 +50,8 @@ const ContentArtWork: NextPage = (): ReactElement => {
   console.log("cek", point);
 
   return (
-    <section className=" -mt-10 px-14">
+    <section className=" md:-mt-10 mt-5 px-14">
+      {/* logo dork */}
       <div className=" flex justify-center">
         <img
           src="./logo-dork.png"
@@ -57,8 +59,11 @@ const ContentArtWork: NextPage = (): ReactElement => {
           className=" lg:w-2/12 md:w-3/12 w-5/12"
         />
       </div>
+      {/* button add art work */}
+      <AddArtWorkModule />
 
-      <div className=" grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-5 gap-3">
+      {/* content */}
+      <div className=" grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-5 gap-3 mt-10">
         {data?.map((data: any) => {
           return (
             <div className="">
