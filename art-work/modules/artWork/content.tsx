@@ -58,7 +58,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
         />
       </div>
 
-      <div className=" grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-5 gap-3">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-5 gap-3">
         {data?.map((data: any) => {
           return (
             <div className="">
