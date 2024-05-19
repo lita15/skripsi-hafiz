@@ -39,7 +39,7 @@ export const NavbarModule: NextPage = (): ReactElement => {
       <div className=" flex flex-row justify-between px-10 md:px-10 md:py-5 py-3 items-center">
         <section className=" nav-logo flex items-center gap-5">
           <img src="./logo.png" alt="" width={50} height={"auto"} />
-          <div className=" flex gap-5 text-white font-inter font-[700] text-[18px]">
+          <div className=" flex gap-5 text-white font-inter font-[700] md:text-[18px] text-[15px]">
             <button className="" onClick={() => router.push("/")}>
               Katalog
             </button>
