@@ -86,6 +86,19 @@ export const NavbarModule: NextPage = (): ReactElement => {
                 } `}
               />
             </button>
+            <button
+              className={`relative pb-2 ${
+                activeButton === "/aboutUs" ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick("/aboutUs")}
+            >
+              About Us
+              <span
+                className={`absolute left-0 bottom-0 w-full h-[2px] ${
+                  activeButton === "/aboutUs" ? "bg-black" : "bg-transparent"
+                } `}
+              />
+            </button>
           </div>
         </section>
         <section className=" nav-auth flex gap-5 text-white items-center">

@@ -1,8 +1,9 @@
 import { NextPage } from "next";
 import { ReactElement, useEffect, useState } from "react";
 import { getCatalog } from "./api";
-import { Image } from "antd/lib";
+import { Image, Modal } from "antd/lib";
 import { Carousel } from "antd/lib";
+import { RiInstagramFill } from "react-icons/ri";
 
 const ContentLanding: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
@@ -19,6 +20,16 @@ const ContentLanding: NextPage = (): ReactElement => {
     fetchData();
   }, []);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <section>
@@ -27,7 +38,7 @@ const ContentLanding: NextPage = (): ReactElement => {
           <img
             src="./logo-dork.png"
             alt=""
-            className=" lg:w-2/12 md:w-3/12 w-5/12 cursor-pointer"
+            className=" lg:w-3/12 md:w-3/12 w-5/12 cursor-pointer"
           />
         </div>
 
@@ -41,7 +52,7 @@ const ContentLanding: NextPage = (): ReactElement => {
               loading="lazy"
               preview={false}
               width={"100%"}
-              height={400}
+              height={600}
             />
           </div>
           <div className=" w-full">
@@ -52,7 +63,7 @@ const ContentLanding: NextPage = (): ReactElement => {
               loading="lazy"
               preview={false}
               width={"100%"}
-              height={400}
+              height={600}
             />
           </div>
         </Carousel>
@@ -64,7 +75,10 @@ const ContentLanding: NextPage = (): ReactElement => {
           {data?.map((data: any) => {
             return (
               <div className="">
-                <div className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl">
+                <div
+                  onClick={() => showModal()}
+                  className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl"
+                >
                   <Image
                     src={data?.attributes?.image?.data[0]?.attributes?.url}
                     alt=""
@@ -78,6 +92,48 @@ const ContentLanding: NextPage = (): ReactElement => {
               </div>
             );
           })}
+          <Modal
+            title="Detail ArtWork"
+            open={isModalOpen}
+            onOk={handleOk}
+            closeIcon={false}
+            width={1000}
+            cancelButtonProps={{ style: { display: "none" } }}
+          >
+            <div className="grid grid-cols-2 gap-5 mt-5">
+              <div className="box-border rounded-[30px] ">
+                <div className=" flex justify-center">
+                  <Image
+                    // src={detail?.attributes?.image?.data[0]?.attributes?.url}
+                    alt=""
+                    className="rounded-[30px] w-full"
+                    preview={false}
+                  />
+                </div>
+              </div>
+              <div className="">
+                <h1 className=" font-[600] text-[20px] font-inter">
+                  {/* {detail?.attributes?.name} */}
+                </h1>
+                <hr />
+                <h2 className=" mt-5 text-[16px] text-black font-[500]">
+                  {/* {detail?.attributes?.user?.data?.attributes?.username} */}
+                </h2>
+                <p className=" mt-3 text-[16px]">
+                  {/* {detail?.attributes?.description} */}
+                </p>
+                <p className=" mt-10 mb-2">Share :</p>
+
+                <RiInstagramFill
+                  size={30}
+                  onClick={() =>
+                    // Router.push(detail?.attributes?.social_media_url)
+                    ""
+                  }
+                />
+              </div>
+            </div>
+          </Modal>
         </div>
       </section>
     </>

@@ -89,8 +89,8 @@ export const LoginModule: NextPage = (): ReactElement => {
             </p>
           </form>
         </section>
-        <div className=" lg:block hidden">
-          <img src="/img-login.jpeg" alt="" className=" w-full h-screen" />
+        <div className=" lg:block hidden login-section lg:pt-40  px-10 pt-50">
+          <img src="/login.jpg" alt="" className=" mx-auto my-auto" />
         </div>
       </section>
     </div>
