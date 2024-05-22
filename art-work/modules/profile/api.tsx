@@ -29,7 +29,7 @@ export const postArtworks = async (id: any, body: any) => {
 };
 
 export const editProfile = async (id: any, body: any) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/users`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`;
   const config = {
     headers: {
       Authorization: `Bearer ${JSON.parse(
