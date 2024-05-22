@@ -1,12 +1,15 @@
 import { NextPage } from "next";
 import { ReactElement, useEffect, useState } from "react";
-import { getCatalog } from "./api";
+import { getCatalog, getCatalogById } from "./api";
 import { Image, Modal } from "antd/lib";
 import { Carousel } from "antd/lib";
 import { RiInstagramFill } from "react-icons/ri";
+import Router from "next/router";
 
 const ContentLanding: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
+  const [detail, setDetail] = useState<any>();
+  const [point, setPoint] = useState();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,10 +23,24 @@ const ContentLanding: NextPage = (): ReactElement => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const catalogData = await getCatalogById(point);
+        setDetail(catalogData?.data);
+      } catch (error) {
+        console.error("Error fetching catalog data:", error);
+      }
+    };
+
+    fetchData();
+  }, [point]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
+  const showModal = (data: any) => {
     setIsModalOpen(true);
+    setPoint(data);
   };
 
   const handleOk = () => {
@@ -76,7 +93,7 @@ const ContentLanding: NextPage = (): ReactElement => {
             return (
               <div className="">
                 <div
-                  onClick={() => showModal()}
+                  onClick={() => showModal(data?.id)}
                   className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl"
                 >
                   <Image
@@ -104,7 +121,7 @@ const ContentLanding: NextPage = (): ReactElement => {
               <div className="box-border rounded-[30px] ">
                 <div className=" flex justify-center">
                   <Image
-                    // src={detail?.attributes?.image?.data[0]?.attributes?.url}
+                    src={detail?.attributes?.image?.data[0]?.attributes?.url}
                     alt=""
                     className="rounded-[30px] w-full"
                     preview={false}
@@ -113,22 +130,21 @@ const ContentLanding: NextPage = (): ReactElement => {
               </div>
               <div className="">
                 <h1 className=" font-[600] text-[20px] font-inter">
-                  {/* {detail?.attributes?.name} */}
+                  {detail?.attributes?.name}
                 </h1>
                 <hr />
                 <h2 className=" mt-5 text-[16px] text-black font-[500]">
-                  {/* {detail?.attributes?.user?.data?.attributes?.username} */}
+                  {detail?.attributes?.user?.data?.attributes?.username}
                 </h2>
                 <p className=" mt-3 text-[16px]">
-                  {/* {detail?.attributes?.description} */}
+                  {detail?.attributes?.description}
                 </p>
                 <p className=" mt-10 mb-2">Share :</p>
 
                 <RiInstagramFill
                   size={30}
                   onClick={() =>
-                    // Router.push(detail?.attributes?.social_media_url)
-                    ""
+                    Router.push(detail?.attributes?.social_media_url)
                   }
                 />
               </div>
