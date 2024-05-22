@@ -117,7 +117,7 @@ export const NavbarModule: NextPage = (): ReactElement => {
                       </p>
                     </Link>
                     <section
-                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer  hover:bg-black text-black hover:text-white px-3 py-1.5 rounded-md shadow-sm"
+                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer hover:bg-gray-500 px-3 py-1.5 rounded-md shadow-sm"
                       onClick={handleLogout}
                     >
                       <BiLogOutCircle className=" text-xl " />
@@ -137,7 +137,7 @@ export const NavbarModule: NextPage = (): ReactElement => {
               </Popover>
             </>
           ) : (
-            <div className=" flex gap-2 md:text-[16px] text-[14px]">
+            <div className=" flex flex-col md:flex-row md:gap-2 gap-1 md:text-[16px] text-[14px]">
               <button
                 className=" font-inter font-[700] bg-gray-900 md:px-6 md:py-2 px-5 py-1 rounded-[20px]"
                 onClick={() => {
@@ -147,7 +147,7 @@ export const NavbarModule: NextPage = (): ReactElement => {
                 Login
               </button>
               <button
-                className=" font-inter font-[700] bg-gray-900 md:px-6 md:py-2 px-5 py-1 rounded-[20px]"
+                className="  font-inter font-[700] bg-gray-900 md:px-6 md:py-2 px-5 py-1 rounded-[20px]"
                 onClick={() => {
                   router.push("/auth/register");
                 }}

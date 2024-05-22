@@ -50,13 +50,13 @@ const ContentArtWork: NextPage = (): ReactElement => {
   console.log("cek", point);
 
   return (
-    <section className=" md:-mt-10 -mt-5 ">
+    <section className=" -mt-10 ">
       {/* logo dork */}
       <div className=" flex justify-center">
         <img
           src="/logo-dork.png"
           alt=""
-          className=" lg:w-4/12 md:w-3/12 w-5/12 cursor-pointer"
+          className=" lg:w-3/12 md:w-3/12 w-7/12 cursor-pointer"
         />
       </div>
       {/* button add art work */}
