@@ -109,19 +109,19 @@ export const NavbarModule: NextPage = (): ReactElement => {
                   <>
                     <Link
                       href={"/profile"}
-                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer hover:bg-gray-500 px-3 py-1.5 rounded-md shadow-sm"
+                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer hover:bg-black text-black hover:text-white px-3 py-1.5 rounded-md shadow-sm"
                     >
-                      <AiOutlineUser className="text-xl text-black" />
-                      <p className="font-medium text-black font-gothic text-[14px]">
+                      <AiOutlineUser className="text-xl " />
+                      <p className="font-medium font-gothic text-[14px]">
                         Profile
                       </p>
                     </Link>
                     <section
-                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer hover:bg-gray-500 px-3 py-1.5 rounded-md shadow-sm"
+                      className="flex gap-2 w-40 items-center transition-all ease-in-out cursor-pointer  hover:bg-black text-black hover:text-white px-3 py-1.5 rounded-md shadow-sm"
                       onClick={handleLogout}
                     >
-                      <BiLogOutCircle className=" text-xl text-black" />
-                      <p className="font-medium text-black font-gothic text-[13px]">
+                      <BiLogOutCircle className=" text-xl " />
+                      <p className="font-medium = font-gothic text-[13px]">
                         Log Out
                       </p>
                     </section>
