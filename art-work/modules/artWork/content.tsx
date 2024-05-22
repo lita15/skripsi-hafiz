@@ -161,7 +161,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
                         />
                       </div>
                     ) : (
-                      "No Data"
+                      ""
                     );
                   })}
                 </div>
