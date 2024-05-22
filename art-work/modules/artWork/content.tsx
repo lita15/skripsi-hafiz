@@ -2,14 +2,16 @@ import { NextPage } from "next";
 import { ReactElement, useEffect, useState } from "react";
 import { Image, Modal } from "antd/lib";
 import { RiInstagramFill } from "react-icons/ri";
-import { getArtworks, getArtworksById } from "./api";
+import { getArtworks, getArtworksById, getArtworksList } from "./api";
 import Router from "next/router";
 import AddArtWorkModule from "./addArtWork";
 
 const ContentArtWork: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
   const [detail, setDetail] = useState<any>();
+  const [listArtwork, setListArtwork] = useState<any>([]);
   const [point, setPoint] = useState();
+  const [userId, setUserId] = useState<any>();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,18 +38,31 @@ const ContentArtWork: NextPage = (): ReactElement => {
     fetchData();
   }, [point]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const catalogData = await getArtworksList(point, userId);
+        setListArtwork(catalogData?.data);
+      } catch (error) {
+        console.error("Error fetching catalog data:", error);
+      }
+    };
+
+    fetchData();
+  }, [point]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = (data: any) => {
     setIsModalOpen(true);
-    setPoint(data);
+    setPoint(data?.id);
+    setUserId(data?.attributes?.user?.data?.id);
+    console.log("haha", data);
   };
 
   const handleOk = () => {
     setIsModalOpen(false);
   };
-
-  console.log("cek", point);
 
   return (
     <section className=" -mt-10 ">
@@ -69,7 +84,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
             <div className="">
               <div
                 className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl cursor-pointer"
-                onClick={() => showModal(data?.id)}
+                onClick={() => showModal(data)}
               >
                 <div className="flex justify-center items-center">
                   {" "}
@@ -136,15 +151,19 @@ const ContentArtWork: NextPage = (): ReactElement => {
                   {detail?.attributes?.user?.data?.attributes?.username}
                 </h1>
                 <div className=" grid md:grid-cols-3 grid-cols-2  mt-3 gap-5">
-                  <div className="box-border border-yellow-950 border-[2px] rounded-[0px] p-1 shadow-2xl flex items-center">
-                    <Image src="/logo-dorks.png " />
-                  </div>
-                  <div className="box-border border-yellow-950 border-[2px] rounded-[0px] p-1 shadow-2xl flex items-center">
-                    <Image src="/logo-dork.png " />
-                  </div>
-                  <div className="box-border border-yellow-950 border-[2px] rounded-[0px] p-1 shadow-2xl flex items-center ">
-                    <Image src="/caraousel1.jpeg " />
-                  </div>
+                  {listArtwork?.map((item: any) => {
+                    return item?.attributes?.isApproved ? (
+                      <div className="box-border border-yellow-950 border-[2px] rounded-[0px] p-1 shadow-2xl flex items-center ">
+                        <Image
+                          src={
+                            item?.attributes?.image?.data[0]?.attributes?.url
+                          }
+                        />
+                      </div>
+                    ) : (
+                      "No Data"
+                    );
+                  })}
                 </div>
               </section>
             </div>

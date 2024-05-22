@@ -28,6 +28,7 @@ const RegisterModule: NextPage = (): ReactElement => {
     };
     try {
       const response = await register(data);
+      alert("register sukses");
       Router.push("/auth/login");
     } catch (error) {
       console.error("Registration failed", error);

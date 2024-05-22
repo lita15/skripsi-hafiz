@@ -37,7 +37,7 @@ export const editProfile = async (id: any, body: any) => {
       )}`,
     },
   };
-  const data = await axios.put(url, config, body);
+  const data = await axios.put(url, body, config);
 
   return data;
 };

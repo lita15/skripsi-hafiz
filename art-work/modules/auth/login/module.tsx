@@ -24,9 +24,11 @@ export const LoginModule: NextPage = (): ReactElement => {
       const response = await login(data);
       localStorage.setItem("token", JSON.stringify(response.jwt));
       localStorage.setItem("user", JSON.stringify(response.user));
+      alert("login sukses");
       Router.push("/");
     } catch (error) {
       console.error("login failed", error);
+      alert("wrong email / password");
       // Handle registration error
     }
   };

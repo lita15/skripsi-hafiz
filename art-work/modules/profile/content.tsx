@@ -47,10 +47,8 @@ const ContentProfile: NextPage = (): ReactElement => {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = {
-      data: {
-        username: username,
-        email: email,
-      },
+      username: username,
+      email: email,
     };
 
     const response = await editProfile(user.id, data);
