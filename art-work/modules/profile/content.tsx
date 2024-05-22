@@ -40,28 +40,28 @@ const ContentProfile: NextPage = (): ReactElement => {
       console.log(info.file.originFileObj);
     },
   };
-  const handleUpload = async (event: any) => {
-    event.preventDefault();
+  // const handleUpload = async (event: any) => {
+  //   event.preventDefault();
 
-    setUploading(true);
+  //   setUploading(true);
 
-    const formData = new FormData();
-    formData.append("files", image as any);
+  //   const formData = new FormData();
+  //   formData.append("files", image as any);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
-      method: "POST",
-      body: formData,
-    });
+  //   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
+  //     method: "POST",
+  //     body: formData,
+  //   });
 
-    if (response.ok) {
-      const result = await response.json();
-      alert("Artwork uploaded successfully!");
-      setImage(result[0].id);
-      setUploading(false);
-    } else {
-      console.error("Error uploading artwork");
-    }
-  };
+  //   if (response.ok) {
+  //     const result = await response.json();
+  //     alert("Artwork uploaded successfully!");
+  //     setImage(result[0].id);
+  //     setUploading(false);
+  //   } else {
+  //     console.error("Error uploading artwork");
+  //   }
+  // };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = {
@@ -76,13 +76,13 @@ const ContentProfile: NextPage = (): ReactElement => {
 
     const response = creatArtworks(data);
 
-    if (response.ok) {
-      const result = await response.json();
-      alert("Artwork uploaded successfully!");
-      console.log("Success:", result);
-    } else {
-      console.error("Error uploading artwork");
-    }
+    // if (response.ok) {
+    //   const result = await response.json();
+    //   alert("Artwork uploaded successfully!");
+    //   console.log("Success:", result);
+    // } else {
+    //   console.error("Error uploading artwork");
+    // }
   };
 
   return (
