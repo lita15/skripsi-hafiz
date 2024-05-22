@@ -56,7 +56,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
         <img
           src="/logo-dork.png"
           alt=""
-          className=" lg:w-4/12 md:w-3/12 w-7/12 cursor-pointer"
+          className=" lg:w-3/12 md:w-3/12 w-7/12 cursor-pointer"
         />
       </div>
       {/* button add art work */}
