@@ -51,11 +51,11 @@ const ContentLanding: NextPage = (): ReactElement => {
     <>
       <section>
         {/* logo dork */}
-        <div className=" flex justify-center -mt-10">
+        <div className=" flex justify-center md:-mt-10 -mt-12">
           <img
             src="./logo-dork.png"
             alt=""
-            className=" lg:w-3/12 md:w-3/12 w-5/12 cursor-pointer"
+            className=" lg:w-3/12 md:w-3/12 w-7/12 cursor-pointer"
           />
         </div>
 
