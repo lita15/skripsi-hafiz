@@ -67,13 +67,13 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
 
     const response = creatArtworks(data);
 
-    if (response.ok) {
-      const result = await response.json();
-      alert("Artwork uploaded successfully!");
-      console.log("Success:", result);
-    } else {
-      console.error("Error uploading artwork");
-    }
+    // if (response.ok) {
+    //   const result = await response.json();
+    //   alert("Artwork uploaded successfully!");
+    //   console.log("Success:", result);
+    // } else {
+    //   console.error("Error uploading artwork");
+    // }
   };
   return (
     <div className=" flex justify-end">
