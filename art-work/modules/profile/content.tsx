@@ -3,26 +3,30 @@ import { ReactElement, useEffect, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons/lib";
 import type { UploadProps } from "antd/lib";
 import { Image, message, Upload } from "antd/lib";
-import { creatArtworks, getArtworks } from "./api";
+import { creatArtworks, editProfile, getArtworks, profileDetail } from "./api";
 import { Button } from "antd/lib";
+import Router from "next/router";
 
 const ContentProfile: NextPage = (): ReactElement => {
-  const { Dragger } = Upload;
   const [user, setUser] = useState<any>();
   const [data, setData] = useState([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [socialMedia, setSocialMedia] = useState("");
+  const [username, setusername] = useState("");
+  const [email, setemail] = useState("");
   const [image, setImage] = useState();
-  const [uploading, setUploading] = useState<boolean>(false);
+
+  const userDetail = async () => {
+    const user = await profileDetail();
+    setUser(user);
+    setusername(user.username);
+    setemail(user.email);
+  };
 
   useEffect(() => {
+    userDetail();
     if (typeof window !== "undefined") {
-      const user = JSON.parse(localStorage.getItem("user") as string);
-      setUser(user);
       const fetchData = async () => {
         try {
-          const catalogData = await getArtworks(user.id);
+          const catalogData = await getArtworks();
           setData(catalogData?.artworks);
         } catch (error) {
           console.error("Error fetching catalog data:", error);
@@ -40,49 +44,23 @@ const ContentProfile: NextPage = (): ReactElement => {
       console.log(info.file.originFileObj);
     },
   };
-  // const handleUpload = async (event: any) => {
-  //   event.preventDefault();
-
-  //   setUploading(true);
-
-  //   const formData = new FormData();
-  //   formData.append("files", image as any);
-
-  //   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
-  //     method: "POST",
-  //     body: formData,
-  //   });
-
-  //   if (response.ok) {
-  //     const result = await response.json();
-  //     alert("Artwork uploaded successfully!");
-  //     setImage(result[0].id);
-  //     setUploading(false);
-  //   } else {
-  //     console.error("Error uploading artwork");
-  //   }
-  // };
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = {
       data: {
-        name: title,
-        image: [image],
-        description: description,
-        user: user.id, // Assume user ID is 1 for this example
-        social_media_url: socialMedia,
+        username: username,
+        email: email,
       },
     };
 
-    const response = creatArtworks(data);
+    const response = await editProfile(user.id, data);
 
-    // if (response.ok) {
-    //   const result = await response.json();
-    //   alert("Artwork uploaded successfully!");
-    //   console.log("Success:", result);
-    // } else {
-    //   console.error("Error uploading artwork");
-    // }
+    if (response.status <= 200) {
+      alert("Profile Update successfully!");
+      Router.reload();
+    } else {
+      console.error("Error Update Profile");
+    }
   };
 
   return (
@@ -116,8 +94,8 @@ const ContentProfile: NextPage = (): ReactElement => {
                   required
                   type="text"
                   id="username"
-                  // value={username}
-                  // onChange={(e) => setTitle(e.target.value)}
+                  value={username}
+                  onChange={(e) => setusername(e.target.value)}
                 />
               </div>
               <div className="mb-3 ">
@@ -132,8 +110,8 @@ const ContentProfile: NextPage = (): ReactElement => {
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
                   required
                   id="email"
-                  // value={description}
-                  // onChange={(e) => setDescription(e.target.value)}
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
                 />
               </div>
 

@@ -65,7 +65,7 @@ const ContentArtWork: NextPage = (): ReactElement => {
       {/* content */}
       <div className=" grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-10 md:gap-5 gap-3 mt-10 px-14">
         {data?.map((data: any) => {
-          return (
+          return data?.attributes?.isApproved ? (
             <div className="">
               <div
                 className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl cursor-pointer"
@@ -85,6 +85,8 @@ const ContentArtWork: NextPage = (): ReactElement => {
                 {data?.attributes?.name}
               </h1>
             </div>
+          ) : (
+            ""
           );
         })}
         <Modal
@@ -130,7 +132,8 @@ const ContentArtWork: NextPage = (): ReactElement => {
               <hr className=" mt-5" />
               <section className="other-project mb-5">
                 <h1 className=" mt-3 font-[600] text-[16px]">
-                  Other creation by Primus Bramantio Harlis
+                  Other creation by{" "}
+                  {detail?.attributes?.user?.data?.attributes?.username}
                 </h1>
                 <div className=" grid md:grid-cols-3 grid-cols-2  mt-3 gap-5">
                   <div className="box-border border-yellow-950 border-[2px] rounded-[0px] p-1 shadow-2xl flex items-center">

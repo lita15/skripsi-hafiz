@@ -1,10 +1,10 @@
 import { NextPage } from "next";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { InboxOutlined } from "@ant-design/icons/lib";
 import type { UploadProps } from "antd/lib";
 import { Button, message, Modal, Upload } from "antd/lib";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { creatArtworks } from "../profile/api";
 
 const AddArtWorkModule: NextPage = (): ReactElement => {
@@ -13,6 +13,7 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [socialMedia, setSocialMedia] = useState("");
+  const [imageOk, setimageOk] = useState(false);
   const [image, setImage] = useState();
   const [uploading, setUploading] = useState<boolean>(false);
 
@@ -22,6 +23,13 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
   const showModalAddArtWork = () => {
     setisModalAddArtWorkOpen(true);
   };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const user = JSON.parse(localStorage.getItem("user") as string);
+      setUser(user);
+    }
+  }, []);
 
   const props: UploadProps = {
     name: "files",
@@ -49,6 +57,7 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
       alert("Artwork uploaded successfully!");
       setImage(result[0].id);
       setUploading(false);
+      setimageOk(true);
     } else {
       console.error("Error uploading artwork");
     }
@@ -60,20 +69,20 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
         name: title,
         image: [image],
         description: description,
-        user: 1, // Assume user ID is 1 for this example
+        user: user.id, // Assume user ID is 1 for this example
         social_media_url: socialMedia,
       },
     };
 
-    const response = creatArtworks(data);
+    const response = await creatArtworks(data);
+    console.log("cek", response);
 
-    // if (response.ok) {
-    //   const result = await response.json();
-    //   alert("Artwork uploaded successfully!");
-    //   console.log("Success:", result);
-    // } else {
-    //   console.error("Error uploading artwork");
-    // }
+    if (response.status <= 200) {
+      alert("Artwork uploaded successfully!");
+      Router.reload();
+    } else {
+      console.error("Error uploading artwork");
+    }
   };
   return (
     <div className=" flex justify-end px-14">
@@ -174,7 +183,8 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
               </button>
               <button
                 onClick={handleSubmit}
-                className=" mt-6 font-[600] bg-black text-white py-2 px-5 rounded-md shadow-sm hover:bg-black hover:text-black hover:border-2 hover:border-black focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                disabled={!title || !description || !imageOk || !socialMedia}
+                className=" mt-6 font-[600] bg-black disabled:text-white text-white py-2 px-5 disabled:bg-slate-300 rounded-md shadow-sm disabled:hover:bg-slate-300  hover:bg-black  disabled:hover:border-0 hover:border-2 hover:border-black focus:outline-none focus:ring-2 focus:ring-offset-2 "
               >
                 Submit
               </button>
