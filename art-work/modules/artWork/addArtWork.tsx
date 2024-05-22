@@ -76,7 +76,7 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
     }
   };
   return (
-    <div className=" flex justify-end">
+    <div className=" flex justify-end px-14">
       <button
         onClick={() => showModalAddArtWork()}
         className=" flex items-center gap-2 mt-4 font-[600] bg-black text-white py-2 px-5 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2"

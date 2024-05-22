@@ -94,7 +94,7 @@ const ContentLanding: NextPage = (): ReactElement => {
               <div className="">
                 <div
                   onClick={() => showModal(data?.id)}
-                  className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl"
+                  className="box-border border-yellow-950 border-[2px] rounded-[30px] p-5 shadow-2xl cursor-pointer"
                 >
                   <Image
                     src={data?.attributes?.image?.data[0]?.attributes?.url}
@@ -110,14 +110,14 @@ const ContentLanding: NextPage = (): ReactElement => {
             );
           })}
           <Modal
-            title="Detail ArtWork"
+            title="Detail Katalog"
             open={isModalOpen}
             onOk={handleOk}
             closeIcon={false}
             width={1000}
             cancelButtonProps={{ style: { display: "none" } }}
           >
-            <div className="grid grid-cols-2 gap-5 mt-5">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mt-5">
               <div className="box-border rounded-[30px] ">
                 <div className=" flex justify-center">
                   <Image
@@ -129,19 +129,21 @@ const ContentLanding: NextPage = (): ReactElement => {
                 </div>
               </div>
               <div className="">
-                <h1 className=" font-[600] text-[20px] font-inter">
+                <h1 className=" font-[600] text-[24px] font-inter">
                   {detail?.attributes?.name}
                 </h1>
                 <hr />
                 <h2 className=" mt-5 text-[16px] text-black font-[500]">
+                  Creation by{" "}
                   {detail?.attributes?.user?.data?.attributes?.username}
                 </h2>
                 <p className=" mt-3 text-[16px]">
                   {detail?.attributes?.description}
                 </p>
-                <p className=" mt-10 mb-2">Share :</p>
+                <p className=" mt-10 mb-2">Social Media :</p>
 
                 <RiInstagramFill
+                  className=" cursor-pointer"
                   size={30}
                   onClick={() =>
                     Router.push(detail?.attributes?.social_media_url)
