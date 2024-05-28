@@ -4,7 +4,10 @@ import { getCatalog, getCatalogById } from "./api";
 import { Image, Modal } from "antd/lib";
 import { Carousel } from "antd/lib";
 import { RiInstagramFill } from "react-icons/ri";
-import Router from "next/router";
+import { AiFillTikTok } from "react-icons/ai";
+import Link from "next/link";
+import { SiShopee } from "react-icons/si";
+import ReactMarkdown from "react-markdown";
 
 const ContentLanding: NextPage = (): ReactElement => {
   const [data, setData] = useState([]);
@@ -117,17 +120,22 @@ const ContentLanding: NextPage = (): ReactElement => {
             width={1000}
             cancelButtonProps={{ style: { display: "none" } }}
           >
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-5 mt-5">
-              <div className="box-border rounded-[30px] ">
-                <div className=" flex justify-center">
-                  <Image
-                    src={detail?.attributes?.image?.data[0]?.attributes?.url}
-                    alt=""
-                    className="rounded-[30px] w-full"
-                    preview={false}
-                  />
-                </div>
-              </div>
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-8 mt-5">
+              <Carousel arrows>
+                <Image
+                  src={detail?.attributes?.image?.data[0]?.attributes?.url}
+                  alt="cek"
+                  className="rounded-[30px] w-full"
+                  preview={false}
+                />
+                <Image
+                  src={detail?.attributes?.image?.data[0]?.attributes?.url}
+                  alt="cek"
+                  className="rounded-[30px] w-full"
+                  preview={false}
+                />
+              </Carousel>
+
               <div className="">
                 <h1 className=" font-[600] text-[24px] font-inter">
                   {detail?.attributes?.name}
@@ -137,18 +145,39 @@ const ContentLanding: NextPage = (): ReactElement => {
                   Creation by{" "}
                   {detail?.attributes?.user?.data?.attributes?.username}
                 </h2>
-                <p className=" mt-3 text-[16px]">
+                {/* <p className=" mt-3 text-[16px]">
                   {detail?.attributes?.description}
-                </p>
+                </p> */}
+                <ReactMarkdown className="mt-3 text-[16px]">
+                  {detail?.attributes?.description}
+                </ReactMarkdown>
                 <p className=" mt-10 mb-2">Social Media :</p>
+                <div className=" flex gap-2">
+                  <Link
+                    href={
+                      "https://www.instagram.com/toughdork?igsh=YWhuZms5MnZqOHhl"
+                    }
+                    target="_blank"
+                  >
+                    {" "}
+                    <RiInstagramFill className=" cursor-pointer" size={30} />
+                  </Link>
 
-                <RiInstagramFill
-                  className=" cursor-pointer"
-                  size={30}
-                  onClick={() =>
-                    Router.push(detail?.attributes?.social_media_url)
-                  }
-                />
+                  <Link
+                    href={
+                      "https://www.tiktok.com/@duckydakii?_t=8mVoPwOVgzI&_r=1"
+                    }
+                    target="_blank"
+                  >
+                    <AiFillTikTok size={30} className=" cursor-pointer" />
+                  </Link>
+                  <Link
+                    href={"https://shopee.co.id/tough_dork"}
+                    target="_blank"
+                  >
+                    <SiShopee size={28} className=" cursor-pointer" />
+                  </Link>
+                </div>
               </div>
             </div>
           </Modal>
