@@ -31,11 +31,17 @@ const ContentAboutUs: NextPage = (): ReactElement => {
           </h3>
           <p className=" font-[400] lg:text-[20px] md:text-[16px] text-[16px] font-inter">
             Instagram:{" "}
-            <a href="https://www.instagram.com/toughdork/"> @toughdork</a>
+            <a href="https://www.instagram.com/toughdork/" target="_blank">
+              {" "}
+              @toughdork
+            </a>
           </p>
           <p className=" font-[400] lg:text-[20px] md:text-[16px] text-[16px] font-inter">
             Tiktok:{" "}
-            <a href="https://www.tiktok.com/@duckydakii"> @duckydakii</a>
+            <a href="https://www.tiktok.com/@duckydakii" target="_blank">
+              {" "}
+              @duckydakii
+            </a>
           </p>
         </section>
         <section className=" e-commerce">
@@ -44,7 +50,7 @@ const ContentAboutUs: NextPage = (): ReactElement => {
           </h3>
           <p className=" font-[400] lg:text-[20px] md:text-[16px] text-[16px] font-inter">
             Shopee :{" "}
-            <a href="https://shopee.co.id/tough_dork">
+            <a href="https://shopee.co.id/tough_dork" target="_blank">
               https://shopee.co.id/tough_dork
             </a>
           </p>

@@ -40,4 +40,14 @@ body {
   width: 20px;
 }
 
+.ant-btn-primary {
+  background: black;
+  color: white;
+}
 
+.ant-btn-primary:hover {
+  background: white;
+  border: 2px;
+  border-color: black;
+  color:  black;
+}

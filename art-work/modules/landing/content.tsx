@@ -142,7 +142,6 @@ const ContentLanding: NextPage = (): ReactElement => {
                 </h1>
                 <hr />
                 <h2 className=" mt-5 text-[16px] text-black font-[500]">
-                  Creation by{" "}
                   {detail?.attributes?.user?.data?.attributes?.username}
                 </h2>
                 {/* <p className=" mt-3 text-[16px]">
