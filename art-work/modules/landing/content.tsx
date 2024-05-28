@@ -122,18 +122,16 @@ const ContentLanding: NextPage = (): ReactElement => {
           >
             <div className="grid md:grid-cols-2 grid-cols-1 gap-8 mt-5">
               <Carousel arrows>
-                <Image
-                  src={detail?.attributes?.image?.data[0]?.attributes?.url}
-                  alt="cek"
-                  className="rounded-[30px] w-full"
-                  preview={false}
-                />
-                <Image
-                  src={detail?.attributes?.image?.data[0]?.attributes?.url}
-                  alt="cek"
-                  className="rounded-[30px] w-full"
-                  preview={false}
-                />
+                {detail?.attributes?.image?.data?.map((item: any) => {
+                  return (
+                    <Image
+                      src={item?.attributes?.url}
+                      alt="cek"
+                      className="rounded-[30px] w-full"
+                      preview={false}
+                    />
+                  );
+                })}
               </Carousel>
 
               <div className="">
@@ -148,7 +146,7 @@ const ContentLanding: NextPage = (): ReactElement => {
                   {detail?.attributes?.description}
                 </p> */}
                 <ReactMarkdown className="mt-3 text-[16px]">
-                  {detail?.attributes?.description}
+                  {detail?.attributes?.description_markdown}
                 </ReactMarkdown>
                 <p className=" mt-10 mb-2">Social Media :</p>
                 <div className=" flex gap-2">
