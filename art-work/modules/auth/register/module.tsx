@@ -7,6 +7,7 @@ const RegisterModule: NextPage = (): ReactElement => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const handleEmailChange = (e: any) => {
     setEmail(e.target.value);
   };
@@ -18,6 +19,9 @@ const RegisterModule: NextPage = (): ReactElement => {
   const handlePasswordChange = (e: any) => {
     setPassword(e.target.value);
   };
+  const handlePhoneNumberChange = (e: any) => {
+    setPhoneNumber(e.target.value);
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -25,6 +29,7 @@ const RegisterModule: NextPage = (): ReactElement => {
       email,
       username,
       password,
+      phone_number: `https://wa.me/${phoneNumber}`,
     };
     try {
       const response = await register(data);
@@ -82,6 +87,23 @@ const RegisterModule: NextPage = (): ReactElement => {
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
                 value={username}
                 onChange={handleUsernameChange}
+                required
+              />
+            </div>
+            <div className="mb-4 ">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Phone Number
+              </label>
+              <input
+                type="number"
+                id="number"
+                name="number"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
                 required
               />
             </div>
