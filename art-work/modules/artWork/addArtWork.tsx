@@ -13,6 +13,7 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [socialMedia, setSocialMedia] = useState("");
+  const [notes, setNotes] = useState("");
   const [imageOk, setimageOk] = useState(false);
   const [image, setImage] = useState();
   const [uploading, setUploading] = useState<boolean>(false);
@@ -37,7 +38,6 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
     showUploadList: false,
     onChange(info) {
       setImage(info.file.originFileObj as any);
-      console.log(info.file.originFileObj);
     },
   };
   const handleUpload = async (event: any) => {
@@ -72,6 +72,7 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
         description: description,
         user: user.id, // Assume user ID is 1 for this example
         social_media_url: socialMedia,
+        admin_notes: notes,
       },
     };
 
@@ -156,6 +157,23 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
                     id="social-media"
                     value={socialMedia}
                     onChange={(e) => setSocialMedia(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3 ">
+                  <label
+                    htmlFor="sosmed"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Notes For Admin
+                  </label>
+                  <input
+                    name="sosmed"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                    required
+                    type="text"
+                    id="social-media"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
                   />
                 </div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
