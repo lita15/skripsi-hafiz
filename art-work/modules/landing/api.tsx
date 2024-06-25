@@ -15,3 +15,11 @@ export const getCatalogById = async (id: any) => {
 
   return data.data;
 };
+
+export const getPromo = async () => {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/banner-promos?populate=image_url`;
+
+  const data = await axios.get(url);
+
+  return data.data;
+};

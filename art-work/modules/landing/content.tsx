@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { ReactElement, useEffect, useState } from "react";
-import { getCatalog, getCatalogById } from "./api";
+import { getCatalog, getCatalogById, getPromo } from "./api";
 import { Image, Modal } from "antd/lib";
 import { Carousel } from "antd/lib";
 import { RiInstagramFill } from "react-icons/ri";
@@ -8,12 +8,11 @@ import { AiFillTikTok } from "react-icons/ai";
 import Link from "next/link";
 import { SiShopee } from "react-icons/si";
 import ReactMarkdown from "react-markdown";
-import { useRouter } from "next/router";
 
 const ContentLanding: NextPage = (): ReactElement => {
-  const router = useRouter();
   const [data, setData] = useState([]);
   const [detail, setDetail] = useState<any>();
+  const [promo, setPromo] = useState([]);
   const [point, setPoint] = useState();
   const [modalPromoOpen, setModalPromoOpen] = useState(false);
   useEffect(() => {
@@ -41,6 +40,21 @@ const ContentLanding: NextPage = (): ReactElement => {
 
     fetchData();
   }, [point]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const promoData = await getPromo();
+        setPromo(promoData?.data);
+      } catch (error) {
+        console.error("Error fetching catalog data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("cekkk", promo);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -203,22 +217,29 @@ const ContentLanding: NextPage = (): ReactElement => {
           open={modalPromoOpen}
           onOk={handleOk}
           closeIcon={false}
-          width={1000}
+          width={500}
           cancelButtonProps={{ style: { display: "none" } }}
         >
           <div className="">
-            <div className=" w-full">
-              <Image
-                src="./logo-dork.png"
-                alt=""
-                // className=" lg:w-1/12 md:w-3/12 w-7/12"
-                preview={false}
-              />
-            </div>
-            <div className=" mt-5 text-[16px] text-black font-[500]">
-              {" "}
-              Deskirption
-            </div>
+            {promo?.map((dataPromo: any) => {
+              return (
+                <>
+                  <div className=" w-full">
+                    <Image
+                      src={
+                        dataPromo?.attributes?.image_url?.data?.attributes?.url
+                      }
+                      alt=""
+                      // className=" lg:w-1/12 md:w-3/12 w-7/12"
+                      preview={false}
+                    />
+                  </div>
+                  <div className=" mt-5 text-[16px] text-black font-[500]">
+                    {dataPromo?.attributes?.description}
+                  </div>
+                </>
+              );
+            })}
           </div>
         </Modal>
       </div>
