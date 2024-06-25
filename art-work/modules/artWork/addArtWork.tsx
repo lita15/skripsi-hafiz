@@ -16,6 +16,7 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
   const [imageOk, setimageOk] = useState(false);
   const [image, setImage] = useState();
   const [uploading, setUploading] = useState<boolean>(false);
+  const [token, setToken] = useState<string | null>(null);
 
   const router = useRouter();
   const [isModalAddArtWorkOpen, setisModalAddArtWorkOpen] = useState(false);
@@ -25,10 +26,10 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const user = JSON.parse(localStorage.getItem("user") as string);
-      setUser(user);
-    }
+    const user = JSON.parse(localStorage.getItem("user") as string);
+    setUser(user);
+    const token = JSON.parse(localStorage.getItem("token") as string);
+    setToken(token);
   }, []);
 
   const props: UploadProps = {
@@ -85,113 +86,121 @@ const AddArtWorkModule: NextPage = (): ReactElement => {
     }
   };
   return (
-    <div className=" flex justify-end px-14">
-      <button
-        onClick={() => showModalAddArtWork()}
-        className=" flex items-center gap-2 md:mt-4 -mt-5 font-[600] bg-black text-white py-2 px-5 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2"
-      >
-        <FaPlus />
-        <span className=" md:block hidden"> Add Art Work</span>
-      </button>
+    <div>
+      {token ? (
+        <div className=" flex justify-end px-14">
+          <button
+            onClick={() => showModalAddArtWork()}
+            className=" flex items-center gap-2 md:mt-4 -mt-5 font-[600] bg-black text-white py-2 px-5 rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2"
+          >
+            <FaPlus />
+            <span className=" md:block hidden"> Add Art Work</span>
+          </button>
 
-      <Modal
-        title="Add Art Work"
-        open={isModalAddArtWorkOpen}
-        // onOk={handleOk}
-        width={500}
-        closeIcon={false}
-        cancelButtonProps={{ style: { display: "none" } }}
-        okButtonProps={{ style: { display: "none" } }}
-      >
-        <div className="">
-          <form action="" className=" md:px-5 px-3">
-            <div className="mb-3 ">
-              <label
-                htmlFor="title"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Title
-              </label>
-              <input
-                name="title"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-                required
-                type="text"
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-            <div className="mb-3 ">
-              <label
-                htmlFor="desc"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Description
-              </label>
-              <textarea
-                name="desc"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-                required
-                id="desc"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <div className="mb-3 ">
-              <label
-                htmlFor="sosmed"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Link Social Media
-              </label>
-              <input
-                name="sosmed"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
-                required
-                type="text"
-                id="social-media"
-                value={socialMedia}
-                onChange={(e) => setSocialMedia(e.target.value)}
-              />
-            </div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Upload Image
-            </label>
-            <Dragger {...props}>
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">
-                Click or drag file to this area to upload
-              </p>
-              <p className="ant-upload-hint">
-                Support for a single or bulk upload. Strictly prohibited from
-                uploading company data or other banned files.
-              </p>
-            </Dragger>
-            <Button onClick={handleUpload} disabled={!image || uploading}>
-              {uploading ? "Uploading..." : "Start Upload"}
-            </Button>
+          <Modal
+            title="Add Art Work"
+            open={isModalAddArtWorkOpen}
+            // onOk={handleOk}
+            width={500}
+            closeIcon={false}
+            cancelButtonProps={{ style: { display: "none" } }}
+            okButtonProps={{ style: { display: "none" } }}
+          >
+            <div className="">
+              <form action="" className=" md:px-5 px-3">
+                <div className="mb-3 ">
+                  <label
+                    htmlFor="title"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Title
+                  </label>
+                  <input
+                    name="title"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                    required
+                    type="text"
+                    id="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3 ">
+                  <label
+                    htmlFor="desc"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    name="desc"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                    required
+                    id="desc"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3 ">
+                  <label
+                    htmlFor="sosmed"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Link Social Media
+                  </label>
+                  <input
+                    name="sosmed"
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                    required
+                    type="text"
+                    id="social-media"
+                    value={socialMedia}
+                    onChange={(e) => setSocialMedia(e.target.value)}
+                  />
+                </div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Upload Image
+                </label>
+                <Dragger {...props}>
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">
+                    Click or drag file to this area to upload
+                  </p>
+                  <p className="ant-upload-hint">
+                    Support for a single or bulk upload. Strictly prohibited
+                    from uploading company data or other banned files.
+                  </p>
+                </Dragger>
+                <Button onClick={handleUpload} disabled={!image || uploading}>
+                  {uploading ? "Uploading..." : "Start Upload"}
+                </Button>
 
-            <div className=" flex gap-3 justify-end">
-              <button
-                onClick={() => router.back()}
-                className=" mt-6 font-[600] bg-transparent border-black border-2  text-black py-2 px-5 rounded-md shadow-sm hover:bg-black hover:text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 "
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSubmit}
-                disabled={!title || !description || !imageOk || !socialMedia}
-                className=" mt-6 font-[600] bg-black disabled:text-white text-white py-2 px-5 disabled:bg-slate-300 rounded-md shadow-sm disabled:hover:bg-slate-300  hover:bg-black  disabled:hover:border-0 hover:border-2 hover:border-black focus:outline-none focus:ring-2 focus:ring-offset-2 "
-              >
-                Submit
-              </button>
+                <div className=" flex gap-3 justify-end">
+                  <button
+                    onClick={() => router.back()}
+                    className=" mt-6 font-[600] bg-transparent border-black border-2  text-black py-2 px-5 rounded-md shadow-sm hover:bg-black hover:text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    disabled={
+                      !title || !description || !imageOk || !socialMedia
+                    }
+                    className=" mt-6 font-[600] bg-black disabled:text-white text-white py-2 px-5 disabled:bg-slate-300 rounded-md shadow-sm disabled:hover:bg-slate-300  hover:bg-black  disabled:hover:border-0 hover:border-2 hover:border-black focus:outline-none focus:ring-2 focus:ring-offset-2 "
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
+          </Modal>
         </div>
-      </Modal>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

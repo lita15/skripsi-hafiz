@@ -8,11 +8,14 @@ import { AiFillTikTok } from "react-icons/ai";
 import Link from "next/link";
 import { SiShopee } from "react-icons/si";
 import ReactMarkdown from "react-markdown";
+import { useRouter } from "next/router";
 
 const ContentLanding: NextPage = (): ReactElement => {
+  const router = useRouter();
   const [data, setData] = useState([]);
   const [detail, setDetail] = useState<any>();
   const [point, setPoint] = useState();
+  const [modalPromoOpen, setModalPromoOpen] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,10 +51,15 @@ const ContentLanding: NextPage = (): ReactElement => {
 
   const handleOk = () => {
     setIsModalOpen(false);
+    setModalPromoOpen(false);
+  };
+
+  const showModalPromoOpen = () => {
+    setModalPromoOpen(true);
   };
 
   return (
-    <>
+    <div className="  relative z-10">
       <section>
         {/* logo dork */}
         <div className=" flex justify-center md:-mt-10 -mt-12">
@@ -180,7 +188,41 @@ const ContentLanding: NextPage = (): ReactElement => {
           </Modal>
         </div>
       </section>
-    </>
+
+      {/* promo button */}
+      <div className="  z-20 sticky bottom-20 text-end p-10 ">
+        <button
+          onClick={() => showModalPromoOpen()}
+          className=" font-inter font-[700] text-[18px] bg-gray-700 md:px-6 md:py-2 px-8 py-1 rounded-[20px] text-white"
+        >
+          Promo
+        </button>
+
+        <Modal
+          title="Promo"
+          open={modalPromoOpen}
+          onOk={handleOk}
+          closeIcon={false}
+          width={1000}
+          cancelButtonProps={{ style: { display: "none" } }}
+        >
+          <div className="">
+            <div className=" w-full">
+              <Image
+                src="./logo-dork.png"
+                alt=""
+                // className=" lg:w-1/12 md:w-3/12 w-7/12"
+                preview={false}
+              />
+            </div>
+            <div className=" mt-5 text-[16px] text-black font-[500]">
+              {" "}
+              Deskirption
+            </div>
+          </div>
+        </Modal>
+      </div>
+    </div>
   );
 };
 
