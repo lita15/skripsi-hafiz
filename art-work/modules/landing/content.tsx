@@ -54,8 +54,6 @@ const ContentLanding: NextPage = (): ReactElement => {
     fetchData();
   }, []);
 
-  console.log("cekkk", promo);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = (data: any) => {
@@ -197,6 +195,21 @@ const ContentLanding: NextPage = (): ReactElement => {
                     <SiShopee size={28} className=" cursor-pointer" />
                   </Link>
                 </div>
+
+                <hr className=" mt-5" />
+                <section className="other-project mb-5">
+                  <h1 className=" mt-3 font-[600] text-[16px]">Size Chart</h1>
+                  <div className=" grid md:grid-cols-3 grid-cols-2  mt-3 gap-5">
+                    <div className="box-border border-yellow-950 border-[2px] rounded-[0px] p-1 shadow-2xl flex items-center ">
+                      <Image
+                        src={
+                          detail?.attributes?.image_size_chart?.data?.attributes
+                            ?.url
+                        }
+                      />
+                    </div>
+                  </div>
+                </section>
               </div>
             </div>
           </Modal>
