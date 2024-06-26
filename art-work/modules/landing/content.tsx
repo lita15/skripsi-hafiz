@@ -250,9 +250,9 @@ const ContentLanding: NextPage = (): ReactElement => {
                       preview={false}
                     />
                   </div>
-                  <div className=" mt-5 text-[16px] text-black font-[500]">
+                  <ReactMarkdown className=" mt-5 text-[16px] text-black font-[500]">
                     {dataPromo?.attributes?.description}
-                  </div>
+                  </ReactMarkdown>
                 </>
               );
             })}
